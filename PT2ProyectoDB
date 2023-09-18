@@ -1,0 +1,51 @@
+CREATE TABLE Categoria (
+ 	id Int Primary Key Not Null,
+  	nombre Varchar(50) nOT nULL
+);
+
+CREATE TABLE Producto (
+ 	id Int Primary Key Not Null,
+  	nombre Varchar(50) nOT nULL,
+  	marca Varchar(50) nOT nULl,
+  	categoria_id int nOT nULl,
+  	precio_unitario Real not null
+);
+
+CREATE TABLE Sucursal (
+ 	id Int Primary Key Not Null,
+  	nombre Varchar(50) nOT nULL,
+  	direccion Varchar(200) Not Null
+);
+
+CREATE TABLE Stock (
+    id INTEGER PRIMARY KEY,
+    sucursal_id INTEGER,
+    producto_id INTEGER,
+    cantidad INTEGER,
+    UNIQUE (sucursal_id, producto_id),
+    FOREIGN KEY (sucursal_id) REFERENCES Sucursal(id),
+    FOREIGN KEY (producto_id) REFERENCES Producto(id)
+);
+
+CREATE TABLE Cliente (
+ 	id Int Primary Key Not Null,
+  	nombre Varchar(50) nOT nULL,
+  	telefono Int Not Null
+);
+
+CREATE TABLE Orden(
+ 	id Int Primary Key Not Null,
+ 	cliente_id Int Not Null,
+	sucursal_id Int Not Null,
+  	fecha datetime nOT nULL,
+  	total Real Not Null
+);
+
+CREATE TABLE Item(
+ 	id Int Primary Key Not Null,
+ 	orden_id Int Not Null,
+	producto_id Int Not Null,
+  	cantidad Int nOT nULL,
+  	monto_venta Real Not Null
+);
+
