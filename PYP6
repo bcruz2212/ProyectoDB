@@ -1,0 +1,29 @@
+#1
+SELECT c.id ,c.nombre, avg(precio_unitario)  as precio_promedio
+FROM producto p 
+INNER JOIN categoria c  ON p.categoria_id = c.id
+GROUP BY  c.id,c.nombre
+ ;
+
+
+#2
+SELECT c.nombre, sum(cantidad) as Cantidad_total
+FROM stock s 
+JOIN producto p  ON s.producto_id = p.id
+JOIN categoria c  ON p.categoria_id = c.id
+GROUP BY  c.nombre  
+;
+
+#3
+SELECT s.nombre,o.sucursal_id, sum(total) as ventas_total
+FROM orden o 
+JOIN sucursal s  ON s.id = o.sucursal_id
+GROUP BY  s.nombre,o.sucursal_id ;
+
+#4
+SELECT c.nombre AS nombre_persona, SUM(o.total) AS mas_gastado
+FROM cliente c
+JOIN orden o ON c.id = o.cliente_id
+GROUP BY c.id, c.nombre
+ORDER BY mas_gastado DESC
+LIMIT 1;
